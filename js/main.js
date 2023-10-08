@@ -50,6 +50,7 @@ function desbloquearInput(){
 
 function manejarInput(event){
     console.log(event.target);
+    resaltarColor(event.target.id);
 }
 
 function actualizarRonda(){
@@ -61,8 +62,9 @@ function delayFunction(delayedFunction, ms, parametro){
     setTimeout(delayedFunction(parametro), ms);
 }
 
-function resaltarColor(color){
-    //resalta el cuadro xd
+function resaltarColor(id){
+    const $cuadro = document.getElementById(id);
+    $cuadro.style.opacity = 1;
 }
 
 function randomCuadro(){
