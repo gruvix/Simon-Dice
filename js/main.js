@@ -15,13 +15,13 @@ function reiniciar(){
 
 function turnoCompu(){
     ronda ++;
-    secuenciaComputadora.push(randomColor());
+    secuenciaComputadora.push(randomCuadro());
 }
 
 function turnoJugador(){
     //turno del jugador
 }
 
-function randomColor(){
-    //generar un color aleatorio
+function randomCuadro(){
+     return Math.floor(Math.random() * 4) + 1;
 }
