@@ -5,15 +5,29 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
  </head>
  <body>
     <h1>Simon Dice</h1>
-    <h2>
-        <div>Es el turno de<p id="turno"></p>Ronda N#<p id="ronda"></p></div>
-        <div id="start"><button type="button">Iniciar</button></div>
-    </h2>
+   <div>Es el turno de<p id="turno"></p>Ronda N#<p id="ronda"></p></div>
+   <div id="start"><button type="button">Iniciar</button></div>
+
+   <div class="container" id="tablero">
+      <div class="row">
+         <!-- Primer cuadro -->
+         <div class="cuadro" id="cuadro1">A</div>
+         <!-- Segundo cuadro -->
+         <div class="cuadro" id="cuadro2">B</div>
+       </div>
+       <div class="row">
+         <!-- Tercer cuadro -->
+         <div class="cuadro" id="cuadro3">C</div>
+         <!-- Cuarto cuadro -->
+         <div class="cuadro" id="cuadro4">D</div>
+       </div>
+   </div>
+
+   <div class="row">Próximo turno en <p id="contador"></p> segundos</div>
 
  </body>
  </html>
