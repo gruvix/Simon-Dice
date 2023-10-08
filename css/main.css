@@ -5,16 +5,17 @@
     flex: 1;
     width: 100px;
     height: 100px;
+    opacity: 0.7;
 }
 #cuadro1{
-    background-color: lightcoral;
+    background-color: rgb(231, 98, 75);
 }
 #cuadro2{
-    background-color: blue;
+    background-color: rgb(19, 89, 219);
 }
 #cuadro3{
-    background-color: green;
+    background-color: rgb(86, 236, 86);
 }
 #cuadro4{
-    background-color: yellow;
+    background-color: rgb(252, 172, 23);
 }
