@@ -65,6 +65,9 @@ function delayFunction(delayedFunction, ms, parametro){
 function resaltarColor(id){
     const $cuadro = document.getElementById(id);
     $cuadro.style.opacity = 1;
+    setTimeout(() => {
+        $cuadro.style.opacity = 0.6;
+    }, 500)
 }
 
 function randomCuadro(){
