@@ -16,9 +16,10 @@ function reiniciar(){
 function roundHandler(justPlayed){
 
     if(justPlayed === "jugador"){
+        bloquearInput();
         turnoCompu();
     }else{
-        turnoJugador();
+        desbloquearInput();
     }
 }
 
@@ -30,13 +31,7 @@ function turnoCompu(){
         delayFunction(resaltarColor, tiempo, color);
     });
 
-    roundHandler("computadora");
-}
-
-function turnoJugador(){
-    //turno del jugador
-    bloquearInput();
-    roundHandler("jugador");
+    delayFunction(roundHandler, tic * secuenciaComputadora.length, "computadora");
 }
 
 function bloquearInput(){
@@ -45,6 +40,16 @@ function bloquearInput(){
                 console.log("input bloqueado")
             }
     })
+}
+
+function desbloquearInput(){
+    document.querySelectorAll(".cuadro").forEach($cuadro => {
+            $cuadro.onclick = manejarInput
+    })
+}
+
+function manejarInput(event){
+    console.log(event.target);
 }
 
 function actualizarRonda(){
