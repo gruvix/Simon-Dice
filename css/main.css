@@ -2,8 +2,9 @@
     display: flex;
 }
 .cuadro {
-    flex: 1;
-    width: 100px;
+    flex-basis: calc(50% - 10px); /* El ancho inicial que desees */
+    max-width: calc(10% - 100px); /* El ancho máximo que desees */
+    min-width: 50px;
     height: 100px;
     opacity: 0.7;
 }
