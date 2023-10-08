@@ -1,4 +1,6 @@
-
+document.querySelector("#start").addEventListener("click", function(){
+    comenzarJuego("jugador")
+});
 
 const tic = 1000; //controla la velocidad del juego, siendo el tiempo en milisegundos
 let ronda = 0;
@@ -6,11 +8,15 @@ let secuenciaComputadora = [];
 
 function comenzarJuego(){
     reiniciar();
-    turnoCompu();
+
+    document.querySelectorAll(".cuadro").forEach(cuadro => {
+        resaltarColor(cuadro.id);
+    });
+    delayFunction(roundHandler, 3*tic, "jugador");
 }
 
 function reiniciar(){
-    //reiniciar
+    secuenciaComputadora = [];
 }
 
 function roundHandler(justPlayed){
@@ -26,9 +32,9 @@ function roundHandler(justPlayed){
 function turnoCompu(){
     
     secuenciaComputadora.push(randomCuadro());
-    secuenciaComputadora.forEach(color, index => {
+    secuenciaComputadora.forEach((cuadro, index) => {
         const tiempo = (index + 1) * tic;
-        delayFunction(resaltarColor, tiempo, color);
+        delayFunction(resaltarColor, tiempo, `cuadro${cuadro}`);
     });
 
     delayFunction(roundHandler, tic * secuenciaComputadora.length, "computadora");
@@ -67,7 +73,7 @@ function resaltarColor(id){
     $cuadro.style.opacity = 1;
     setTimeout(() => {
         $cuadro.style.opacity = 0.6;
-    }, 500)
+    }, tic*0.5)
 }
 
 function randomCuadro(){
