@@ -3,4 +3,18 @@
 }
 .cuadro {
     flex: 1;
+    width: 100px;
+    height: 100px;
+}
+#cuadro1{
+    background-color: lightcoral;
+}
+#cuadro2{
+    background-color: blue;
+}
+#cuadro3{
+    background-color: green;
+}
+#cuadro4{
+    background-color: yellow;
 }
