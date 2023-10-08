@@ -40,7 +40,11 @@ function turnoJugador(){
 }
 
 function bloquearInput(){
-
+    document.querySelectorAll(".cuadro").forEach($cuadro => {
+            $cuadro.onclick = function(){
+                console.log("input bloqueado")
+            }
+    })
 }
 
 function actualizarRonda(){
