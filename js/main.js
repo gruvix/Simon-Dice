@@ -16,13 +16,18 @@ function reiniciar(){
 function turnoCompu(){
     ronda ++;
     secuenciaComputadora.push(randomCuadro());
-    secuenciaComputadora.forEach(color => {
-        
+    secuenciaComputadora.forEach(color, index => {
+        const tiempo = (index + 1) * 1000;
+        delayFunction(resaltarColor, tiempo, color);
     });
 }
 
-function delayFunction(delayedFunction, ms, parametro){ {
+function delayFunction(delayedFunction, ms, parametro){
     setTimeout(delayedFunction(parametro), ms);
+}
+
+function resaltarColor(color){
+    //resalta el cuadro xd
 }
 
 function turnoJugador(){
