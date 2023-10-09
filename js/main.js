@@ -12,7 +12,8 @@ function comenzarJuego(){
     document.querySelectorAll(".cuadro").forEach(cuadro => {
         resaltarColor(cuadro.id);
     });
-    delayFunction(roundHandler, 3*tic, "jugador");
+    const esperaMs = 5*tic;
+    delayFunction(roundHandler, esperaMs, "jugador");
 }
 
 function reiniciar(){
@@ -55,7 +56,6 @@ function desbloquearInput(){
 }
 
 function manejarInput(event){
-    console.log(event.target);
     resaltarColor(event.target.id);
 }
 
@@ -69,11 +69,14 @@ function delayFunction(delayedFunction, ms, parametro){
 }
 
 function resaltarColor(id){
+    if(id == null){
+        console.log("MAL")
+    }
     const $cuadro = document.getElementById(id);
     $cuadro.style.opacity = 1;
     setTimeout(() => {
         $cuadro.style.opacity = 0.6;
-    }, tic*0.5)
+    }, tic*0.5);
 }
 
 function randomCuadro(){
