@@ -5,6 +5,7 @@ document.querySelector("#start").addEventListener("click", function(){
 const tic = 1000; //controla la velocidad del juego, siendo el tiempo en milisegundos
 let ronda = 0;
 let secuenciaComputadora = [];
+let secuenciaJugador = [];
 
 function comenzarJuego(){
     reiniciar();
@@ -18,10 +19,12 @@ function comenzarJuego(){
 
 function reiniciar(){
     secuenciaComputadora = [];
+    secuenciaJugador = [];
 }
 
 function roundHandler(justPlayed){
-
+    actualizarRonda();
+    secuenciaJugador = [];
     if(justPlayed === "jugador"){
         bloquearInput();
         turnoCompu();
@@ -35,10 +38,10 @@ function turnoCompu(){
     secuenciaComputadora.push(randomCuadro());
     secuenciaComputadora.forEach((cuadro, index) => {
         const tiempo = (index + 1) * tic;
-        delayFunction(resaltarColor, tiempo, `cuadro${cuadro}`);
+        delayFunction(resaltarColor, tiempo, cuadro);
     });
-
-    delayFunction(roundHandler, tic * secuenciaComputadora.length, "computadora");
+    const delay = tic * secuenciaComputadora.length + 1000;
+    delayFunction(roundHandler, delay, "computadora");
 }
 
 function bloquearInput(){
@@ -57,10 +60,17 @@ function desbloquearInput(){
 
 function manejarInput(event){
     resaltarColor(event.target.id);
+    secuenciaJugador.push(event.target.id);
+    if(secuenciaJugador[secuenciaJugador.length-1] === secuenciaComputadora[secuenciaJugador.length-1]){
+        setTimeout(() => {
+            console.log("Ganaste la ronda!")
+            setTimeout(roundHandler("jugador"), tic);
+        }, tic);
+    }
 }
 
 function actualizarRonda(){
-    ronda ++;
+    ronda += 0.5;
     document.getElementById("ronda").textContent = ronda;
 }
 
@@ -77,5 +87,5 @@ function resaltarColor(id){
 }
 
 function randomCuadro(){
-     return Math.floor(Math.random() * 4) + 1;
+     return `cuadro${Math.floor(Math.random() * 4) + 1}`;
 }
