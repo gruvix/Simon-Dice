@@ -9,13 +9,11 @@ let secuenciaComputadora = [];
 let secuenciaJugador = [];
 
 function comenzarJuego(){
-    reiniciar();
-
     document.querySelectorAll(".cuadro").forEach(cuadro => {
         resaltarColor(cuadro.id);
     });
     const esperaMs = 3*tic;
-    delayFunction(roundHandler, esperaMs, "jugador");
+    delayFunction(roundHandler, esperaMs, "computadora");
 }
 
 function reiniciar(){
@@ -49,12 +47,13 @@ function turnoCompu(){
     
     secuenciaComputadora.push(randomCuadro());
     console.log(secuenciaComputadora);
+    
     secuenciaComputadora.forEach((cuadro, index) => {
         const tiempo = (index + 1) * tic;
-        delayFunction(resaltarColor, tiempo, cuadro);
+        setTimeout(resaltarColor(cuadro), tiempo);
     });
     const delay = tic * secuenciaComputadora.length + 1000;
-    delayFunction(roundHandler, delay, "jugador");
+    setTimeout(roundHandler("jugador"), delay);
 }
 
 function bloquearInput(){
@@ -78,6 +77,7 @@ function manejarInput(event){
     if(secuenciaJugador[secuenciaJugador.length-1] !== secuenciaComputadora[secuenciaJugador.length-1]){
         resaltarError(event.target.id);
         roundHandler("death")
+        return;
     }
     if(secuenciaComputadora.length === secuenciaJugador.length){
         setTimeout(() => {
