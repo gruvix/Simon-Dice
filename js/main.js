@@ -69,9 +69,6 @@ function delayFunction(delayedFunction, ms, parametro){
 }
 
 function resaltarColor(id){
-    if(id == null){
-        console.log("MAL")
-    }
     const $cuadro = document.getElementById(id);
     $cuadro.style.opacity = 1;
     setTimeout(() => {
