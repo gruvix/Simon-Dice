@@ -1,4 +1,5 @@
 document.querySelector("#start").addEventListener("click", function(){
+    document.querySelector("#start").style.display = "none";
     comenzarJuego("jugador")
 });
 
@@ -30,9 +31,11 @@ function roundHandler(justPlayed){
         actualizarRonda(1);
         bloquearInput();
         turnoCompu();
-    }else{
+    }else if(justPlayed === "computadora"){
         secuenciaJugador = [];
         desbloquearInput();
+    }else if(justPlayed === "death"){
+        alert("Game Over");
     }
 }
 
@@ -68,7 +71,8 @@ function manejarInput(event){
     resaltarColor(event.target.id);
     secuenciaJugador.push(event.target.id);
     if(secuenciaJugador[secuenciaJugador.length-1] !== secuenciaComputadora[secuenciaJugador.length-1]){
-        console.log("Perdiste la ronda!")
+        resaltarError(event.target.id);
+        roundHandler("death")
     }
     if(secuenciaComputadora.length === secuenciaJugador.length){
         setTimeout(() => {
@@ -82,6 +86,14 @@ function desbloquearInput(){
     document.querySelectorAll(".cuadro").forEach($cuadro => {
             $cuadro.onclick = manejarInput
     })
+}
+
+function resaltarError(id){
+    let borde = document.getElementById(id).style.inset;
+      borde = "0 0 0 1px red"
+    setTimeout(function() {
+        borde = "";
+    }, 1000);
 }
 
 /////////////////////////////////////////////////////OTROS////////////////////////////////////////
