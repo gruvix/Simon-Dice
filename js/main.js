@@ -54,11 +54,11 @@ function bloquearInput(){
     })
 }
 
-function desbloquearInput(){
-    document.querySelectorAll(".cuadro").forEach($cuadro => {
-            $cuadro.onclick = manejarInput
-    })
+function randomCuadro(){
+    return `cuadro${Math.floor(Math.random() * 4) + 1}`;
 }
+
+
 /////////////////////////////////////////////////////TURNO JUGADOR////////////////////////////////////////
 
 function manejarInput(event){
@@ -72,11 +72,17 @@ function manejarInput(event){
     }
 }
 
+function desbloquearInput(){
+    document.querySelectorAll(".cuadro").forEach($cuadro => {
+            $cuadro.onclick = manejarInput
+    })
+}
+
+/////////////////////////////////////////////////////OTROS////////////////////////////////////////
 function actualizarRonda(){
     ronda += 0.5;
     document.getElementById("ronda").textContent = ronda;
 }
-/////////////////////////////////////////////////////OTROS////////////////////////////////////////
 
 function delayFunction(delayedFunction, ms, parametro){
     setTimeout(delayedFunction(parametro), ms);
@@ -90,6 +96,3 @@ function resaltarColor(id){
     }, tic*0.5);
 }
 
-function randomCuadro(){
-     return `cuadro${Math.floor(Math.random() * 4) + 1}`;
-}
