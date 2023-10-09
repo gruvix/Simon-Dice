@@ -25,16 +25,16 @@ function reiniciar(){
 }
 /////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
 
-function roundHandler(justPlayed){
+function roundHandler(nextTurn){
     
-    if(justPlayed === "jugador"){
+    if(nextTurn === "computadora"){
         actualizarRonda(1);
         bloquearInput();
         turnoCompu();
-    }else if(justPlayed === "computadora"){
+    }else if(nextTurn === "jugador"){
         secuenciaJugador = [];
         desbloquearInput();
-    }else if(justPlayed === "death"){
+    }else if(nextTurn === "death"){
         alert("Game Over");
     }
 }
@@ -49,7 +49,7 @@ function turnoCompu(){
         delayFunction(resaltarColor, tiempo, cuadro);
     });
     const delay = tic * secuenciaComputadora.length + 1000;
-    delayFunction(roundHandler, delay, "computadora");
+    delayFunction(roundHandler, delay, "jugador");
 }
 
 function bloquearInput(){
@@ -77,7 +77,7 @@ function manejarInput(event){
     if(secuenciaComputadora.length === secuenciaJugador.length){
         setTimeout(() => {
             console.log("Ganaste la ronda!")
-            setTimeout(roundHandler("jugador"), tic);
+            setTimeout(roundHandler("computadora"), tic);
         }, tic);
     }
 }
