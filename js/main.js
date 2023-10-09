@@ -1,5 +1,5 @@
 document.querySelector("#start").addEventListener("click", function(){
-    document.querySelector("#start").style.display = "none";
+    document.querySelector("#start").classList.add("oculto");
     comenzarJuego("jugador")
 });
 
@@ -20,7 +20,6 @@ function reiniciar(){
     actualizarRonda(-ronda);
     secuenciaComputadora = [];
     secuenciaJugador = [];
-    document.querySelector("#start").classList.remove("oculto");
 }
 /////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
 
@@ -102,6 +101,18 @@ function resaltarError(id){
 }
 
 /////////////////////////////////////////////////////OTROS////////////////////////////////////////
+function mostrarGameOver(){
+    document.querySelector("#game-over").classList.remove("oculto");
+}
+function ocultarGameOver(){
+    document.querySelector("#game-over").classList.add("oculto");
+}
+function mostrarBotonInicio(){
+    document.querySelector("#start").classList.remove("oculto");
+}
+function ocultarBotonInicio(){
+    document.querySelector("#start").classList.add("oculto");
+}
 function actualizarRonda(x){
     ronda += x;
     document.getElementById("ronda").textContent = ronda;
