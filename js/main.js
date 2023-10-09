@@ -13,7 +13,7 @@ function comenzarJuego(){
     document.querySelectorAll(".cuadro").forEach(cuadro => {
         resaltarColor(cuadro.id);
     });
-    const esperaMs = 5*tic;
+    const esperaMs = 3*tic;
     delayFunction(roundHandler, esperaMs, "jugador");
 }
 
@@ -21,6 +21,7 @@ function reiniciar(){
     secuenciaComputadora = [];
     secuenciaJugador = [];
 }
+/////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
 
 function roundHandler(justPlayed){
     actualizarRonda();
@@ -33,6 +34,7 @@ function roundHandler(justPlayed){
     }
 }
 
+/////////////////////////////////////////////////////TURNO COMPU////////////////////////////////////////
 function turnoCompu(){
     
     secuenciaComputadora.push(randomCuadro());
@@ -57,6 +59,7 @@ function desbloquearInput(){
             $cuadro.onclick = manejarInput
     })
 }
+/////////////////////////////////////////////////////TURNO JUGADOR////////////////////////////////////////
 
 function manejarInput(event){
     resaltarColor(event.target.id);
@@ -73,6 +76,7 @@ function actualizarRonda(){
     ronda += 0.5;
     document.getElementById("ronda").textContent = ronda;
 }
+/////////////////////////////////////////////////////OTROS////////////////////////////////////////
 
 function delayFunction(delayedFunction, ms, parametro){
     setTimeout(delayedFunction(parametro), ms);
