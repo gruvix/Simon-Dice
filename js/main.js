@@ -37,9 +37,10 @@ function roundHandler(nextTurn){
     }
 }
 function terminarJuego(){
-    console.log("Game Over!");
+    mostrarGameOver();
     bloquearInput();
     setTimeout(reiniciar(), tic);
+    mostrarBotonInicio();
 }
 /////////////////////////////////////////////////////TURNO COMPU////////////////////////////////////////
 function turnoCompu(){
