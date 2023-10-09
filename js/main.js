@@ -22,6 +22,7 @@ function reiniciar(){
     actualizarRonda(-ronda);
     secuenciaComputadora = [];
     secuenciaJugador = [];
+    document.querySelector("#start").classList.remove("oculto");
 }
 /////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
 
@@ -35,10 +36,14 @@ function roundHandler(nextTurn){
         secuenciaJugador = [];
         desbloquearInput();
     }else if(nextTurn === "death"){
-        alert("Game Over");
+        terminarJuego()
     }
 }
-
+function terminarJuego(){
+    console.log("Game Over!");
+    bloquearInput();
+    setTimeout(reiniciar(), tic);
+}
 /////////////////////////////////////////////////////TURNO COMPU////////////////////////////////////////
 function turnoCompu(){
     
