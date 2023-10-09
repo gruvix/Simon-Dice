@@ -18,18 +18,20 @@ function comenzarJuego(){
 }
 
 function reiniciar(){
+    actualizarRonda(-ronda);
     secuenciaComputadora = [];
     secuenciaJugador = [];
 }
 /////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
 
 function roundHandler(justPlayed){
-    actualizarRonda();
-    secuenciaJugador = [];
+    
     if(justPlayed === "jugador"){
+        actualizarRonda(1);
         bloquearInput();
         turnoCompu();
     }else{
+        secuenciaJugador = [];
         desbloquearInput();
     }
 }
@@ -38,6 +40,7 @@ function roundHandler(justPlayed){
 function turnoCompu(){
     
     secuenciaComputadora.push(randomCuadro());
+    console.log(secuenciaComputadora);
     secuenciaComputadora.forEach((cuadro, index) => {
         const tiempo = (index + 1) * tic;
         delayFunction(resaltarColor, tiempo, cuadro);
@@ -64,7 +67,10 @@ function randomCuadro(){
 function manejarInput(event){
     resaltarColor(event.target.id);
     secuenciaJugador.push(event.target.id);
-    if(secuenciaJugador[secuenciaJugador.length-1] === secuenciaComputadora[secuenciaJugador.length-1]){
+    if(secuenciaJugador[secuenciaJugador.length-1] !== secuenciaComputadora[secuenciaJugador.length-1]){
+        console.log("Perdiste la ronda!")
+    }
+    if(secuenciaComputadora.length === secuenciaJugador.length){
         setTimeout(() => {
             console.log("Ganaste la ronda!")
             setTimeout(roundHandler("jugador"), tic);
@@ -79,8 +85,8 @@ function desbloquearInput(){
 }
 
 /////////////////////////////////////////////////////OTROS////////////////////////////////////////
-function actualizarRonda(){
-    ronda += 0.5;
+function actualizarRonda(x){
+    ronda += x;
     document.getElementById("ronda").textContent = ronda;
 }
 
