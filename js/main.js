@@ -39,7 +39,7 @@ function terminarJuego(){
     mostrarGameOver();
     bloquearInput();
     setTimeout(reiniciar, tic);
-    mostrarBotonInicio();
+    setTimeout(mostrarBotonInicio, tic);
 }
 /////////////////////////////////////////////////////TURNO COMPU////////////////////////////////////////
 function crearSecuencia(){
@@ -80,7 +80,6 @@ function manejarInput(event){
         return;
     }
     if(secuenciaComputadora.length === secuenciaJugador.length){
-        console.log("Ganaste la ronda!")
         setTimeout(roundHandler, tic, "computadora");
     }
 }
