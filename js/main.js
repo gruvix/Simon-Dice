@@ -4,7 +4,7 @@ document.querySelector("#start").addEventListener("click", function(){
     startGame("jugador")
 });
 
-const tic = 1000; //controla la velocidad del juego, siendo el tiempo en milisegundos
+let tic = 1000; //controla la velocidad del juego, siendo el tiempo en milisegundos
 let round = 0;
 let computerSequence = [];
 let playerSequence = [];
