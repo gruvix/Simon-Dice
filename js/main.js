@@ -45,9 +45,9 @@ function endGame(){
 function startSequence(){
     
     computerSequence.push(randomColorBox());
-    computerSequence.forEach((cuadro, index) => {
-        const tiempo = (index + 1) * tic;
-        setTimeout(highLightColor, tiempo, cuadro);
+    computerSequence.forEach((colorBox, index) => {
+        const time = (index + 1) * tic;
+        setTimeout(highLightColor, time, colorBox);
     });
     const delay = (tic * computerSequence.length + 0.5*tic).toFixed(1);
     setTimeout(roundHandler, delay,"player");
@@ -74,22 +74,23 @@ function reduceCounterBy100Ms(ultimoValor){
     document.querySelector("#contador").textContent = valorActual;
     setTimeout(reduceCounterBy100Ms, 100, valorActual);
 }
-
-
 /////////////////////////////////////////////////////TURNO JUGADOR////////////////////////////////////////
-
 function handleInput(event){
     highLightColor(event.target.id);
     playerSequence.push(event.target.id);
+    roundHandler(compareSequences());
+}
+function compareSequences(){
     if(playerSequence[playerSequence.length-1] !== computerSequence[playerSequence.length-1]){
         resaltarError(event.target.id);
-        roundHandler("end")
-        return;
+        return "end";
     }
     if(computerSequence.length === playerSequence.length){
-        setTimeout(roundHandler, tic, "computer");
+        //setTimeout(roundHandler, tic, "computer");
+        return "computer";
     }
 }
+
 
 function unlockInput(){
     document.querySelectorAll(".cuadro").forEach($cuadro => {
@@ -118,19 +119,14 @@ function hideGameOver(){
 }
 function showStartButton(){
     document.querySelector("#start").removeAttribute("disabled");
-
-    //document.querySelector("#start").classList.remove("oculto");
 }
 function hideStartButton(){
     document.querySelector("#start").setAttribute("disabled", "disabled");
-
-    //document.querySelector("#start").classList.add("oculto");
 }
 function updateRound(x){
     round += x;
     document.getElementById("ronda").textContent = round;
 }
-
 function highLightColor(id){
     const $cuadro = document.getElementById(id);
     $cuadro.style.opacity = 1;
