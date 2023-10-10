@@ -1,5 +1,5 @@
 document.querySelector("#start").addEventListener("click", function(){
-    document.querySelector("#start").classList.add("oculto");
+    ocultarBotonInicio();
     comenzarJuego("jugador")
 });
 
@@ -13,7 +13,7 @@ function comenzarJuego(){
     document.querySelectorAll(".cuadro").forEach(cuadro => {
         resaltarColor(cuadro.id);
     });
-    roundHandler("computadora");
+    roundHandler("computer");
 }
 
 function reiniciar(){
@@ -24,14 +24,14 @@ function reiniciar(){
 /////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
 
 function roundHandler(nextTurn){
-    if(nextTurn === "computadora"){
+    if(nextTurn === "computer"){
         actualizarRonda(1);
         bloquearInput();
         crearSecuencia();
-    }else if(nextTurn === "jugador"){
+    }else if(nextTurn === "player"){
         secuenciaJugador = [];
         desbloquearInput();
-    }else if(nextTurn === "death"){
+    }else if(nextTurn === "end"){
         terminarJuego()
     }
 }
@@ -45,15 +45,13 @@ function terminarJuego(){
 function crearSecuencia(){
     
     secuenciaComputadora.push(randomCuadro());
-    console.log(secuenciaComputadora);
-    
     secuenciaComputadora.forEach((cuadro, index) => {
         const tiempo = (index + 1) * tic;
-        console.log(tiempo);
         setTimeout(resaltarColor, tiempo, cuadro);
     });
-    const delay = tic * secuenciaComputadora.length + 1000;
-    setTimeout(roundHandler, delay,"jugador");
+    const delay = (tic * secuenciaComputadora.length + 0.5*tic).toFixed(1);
+    setTimeout(roundHandler, delay,"player");
+    reducirContadorCada100Ms((delay/1000)+0.1)
 }
 
 function bloquearInput(){
@@ -68,6 +66,15 @@ function randomCuadro(){
     return `cuadro${Math.floor(Math.random() * 4) + 1}`;
 }
 
+function reducirContadorCada100Ms(ultimoValor){
+    if(ultimoValor <= 0){
+        return;
+    }
+    const valorActual = (ultimoValor - 0.1).toFixed(1);
+    document.querySelector("#contador").textContent = valorActual;
+    setTimeout(reducirContadorCada100Ms, 100, valorActual);
+}
+
 
 /////////////////////////////////////////////////////TURNO JUGADOR////////////////////////////////////////
 
@@ -76,11 +83,11 @@ function manejarInput(event){
     secuenciaJugador.push(event.target.id);
     if(secuenciaJugador[secuenciaJugador.length-1] !== secuenciaComputadora[secuenciaJugador.length-1]){
         resaltarError(event.target.id);
-        roundHandler("death")
+        roundHandler("end")
         return;
     }
     if(secuenciaComputadora.length === secuenciaJugador.length){
-        setTimeout(roundHandler, tic, "computadora");
+        setTimeout(roundHandler, tic, "computer");
     }
 }
 
@@ -110,10 +117,14 @@ function ocultarGameOver(){
     document.querySelector("#game-over").classList.add("oculto");
 }
 function mostrarBotonInicio(){
-    document.querySelector("#start").classList.remove("oculto");
+    document.querySelector("#start").removeAttribute("disabled");
+
+    //document.querySelector("#start").classList.remove("oculto");
 }
 function ocultarBotonInicio(){
-    document.querySelector("#start").classList.add("oculto");
+    document.querySelector("#start").setAttribute("disabled", "disabled");
+
+    //document.querySelector("#start").classList.add("oculto");
 }
 function actualizarRonda(x){
     ronda += x;
