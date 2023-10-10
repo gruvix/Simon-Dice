@@ -52,9 +52,9 @@ function startSequence(){
         const time = (index+0.5) * tic;
         setTimeout(highLightColor, time, colorBox);
     });
-    const delay = (tic * computerSequence.length + 0.5*tic).toFixed(1);
+    const delay = (tic * computerSequence.length + 1*tic).toFixed(1);
     setTimeout(roundHandler, delay,"player");
-    reduceCounterBy100Ms((delay/1000)+0.1)
+    reduceCounterBy100Ms((delay/1000))
 }
 
 function blockInput(){
@@ -79,13 +79,15 @@ function reduceCounterBy100Ms(ultimoValor){
 }
 /////////////////////////////////////////////////////TURNO JUGADOR////////////////////////////////////////
 function handleInput(event){
-    highLightColor(event.target.id);
-    playerSequence.push(event.target.id);
-    roundHandler(compareSequences());
+    const id = event.target.id;
+    highLightColor(id);
+    playerSequence.push(id);
+    roundHandler(compareSequences(id));
 }
-function compareSequences(){
+function compareSequences(id){
     if(playerSequence[playerSequence.length-1] !== computerSequence[playerSequence.length-1]){
-        resaltarError(event.target.id);
+        highLightError(id);
+        highLightCorrect(computerSequence[playerSequence.length-1]);
         return "end";
     }
     if(computerSequence.length === playerSequence.length){
@@ -100,7 +102,7 @@ function unlockInput(){
     })
 }
 
-function resaltarError(id){
+function highLightError(id){
     for(let index = 0; index < 7; index++){
         const $cuadro = document.getElementById(id);
         setTimeout(function() {
@@ -108,6 +110,18 @@ function resaltarError(id){
         }, index*200);
         setTimeout(function() {
             $cuadro.classList.remove("error");
+        }, index*200+100);
+    }
+}
+
+function highLightCorrect(id){
+    for(let index = 0; index < 7; index++){
+        const $cuadro = document.getElementById(id);
+        setTimeout(function() {
+            $cuadro.classList.add("correct");
+        }, index*200);
+        setTimeout(function() {
+            $cuadro.classList.remove("correct");
         }, index*200+100);
     }
 }
