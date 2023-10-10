@@ -9,11 +9,11 @@ let secuenciaComputadora = [];
 let secuenciaJugador = [];
 
 function comenzarJuego(){
+    ocultarGameOver();
     document.querySelectorAll(".cuadro").forEach(cuadro => {
         resaltarColor(cuadro.id);
     });
-    const delay = 3*tic;
-    setTimeout(roundHandler("computadora"), delay);
+    roundHandler("computadora");
 }
 
 function reiniciar(){
@@ -24,11 +24,10 @@ function reiniciar(){
 /////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
 
 function roundHandler(nextTurn){
-    
     if(nextTurn === "computadora"){
         actualizarRonda(1);
         bloquearInput();
-        turnoCompu();
+        crearSecuencia();
     }else if(nextTurn === "jugador"){
         secuenciaJugador = [];
         desbloquearInput();
@@ -39,11 +38,11 @@ function roundHandler(nextTurn){
 function terminarJuego(){
     mostrarGameOver();
     bloquearInput();
-    setTimeout(reiniciar(), tic);
+    setTimeout(reiniciar, tic);
     mostrarBotonInicio();
 }
 /////////////////////////////////////////////////////TURNO COMPU////////////////////////////////////////
-function turnoCompu(){
+function crearSecuencia(){
     
     secuenciaComputadora.push(randomCuadro());
     console.log(secuenciaComputadora);
@@ -51,10 +50,10 @@ function turnoCompu(){
     secuenciaComputadora.forEach((cuadro, index) => {
         const tiempo = (index + 1) * tic;
         console.log(tiempo);
-        setTimeout(resaltarColor(cuadro), tiempo);
+        setTimeout(resaltarColor, tiempo, cuadro);
     });
     const delay = tic * secuenciaComputadora.length + 1000;
-    setTimeout(roundHandler("jugador"), delay);
+    setTimeout(roundHandler, delay,"jugador");
 }
 
 function bloquearInput(){
@@ -81,10 +80,8 @@ function manejarInput(event){
         return;
     }
     if(secuenciaComputadora.length === secuenciaJugador.length){
-        setTimeout(() => {
-            console.log("Ganaste la ronda!")
-            setTimeout(roundHandler("computadora"), tic);
-        }, tic);
+        console.log("Ganaste la ronda!")
+        setTimeout(roundHandler, tic, "computadora");
     }
 }
 
