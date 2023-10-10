@@ -27,7 +27,7 @@ function roundHandler(nextTurn){
     if(nextTurn === "computer"){
         updateRound(1);
         blockInput();
-        startSequence();
+        setTimeout(startSequence, tic);
     }else if(nextTurn === "player"){
         playerSequence = [];
         unlockInput();
@@ -86,7 +86,6 @@ function compareSequences(){
         return "end";
     }
     if(computerSequence.length === playerSequence.length){
-        //setTimeout(roundHandler, tic, "computer");
         return "computer";
     }
 }
