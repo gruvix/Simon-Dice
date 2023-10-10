@@ -92,11 +92,15 @@ function desbloquearInput(){
 }
 
 function resaltarError(id){
-    let borde = document.getElementById(id).style.inset;
-      borde = "0 0 0 1px red"
-    setTimeout(function() {
-        borde = "";
-    }, 1000);
+    for(let index = 0; index < 7; index++){
+        const $cuadro = document.getElementById(id);
+        setTimeout(function() {
+            $cuadro.classList.add("error");
+        }, index*200);
+        setTimeout(function() {
+            $cuadro.classList.remove("error");
+        }, index*200+100);
+    }
 }
 
 /////////////////////////////////////////////////////OTROS////////////////////////////////////////
