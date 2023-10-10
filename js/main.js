@@ -1,60 +1,60 @@
 document.querySelector("#start").addEventListener("click", function(){
-    ocultarBotonInicio();
-    comenzarJuego("jugador")
+    hideStartButton();
+    startGame("jugador")
 });
 
 const tic = 1000; //controla la velocidad del juego, siendo el tiempo en milisegundos
-let ronda = 0;
-let secuenciaComputadora = [];
-let secuenciaJugador = [];
+let round = 0;
+let computerSequence = [];
+let playerSequence = [];
 
-function comenzarJuego(){
-    ocultarGameOver();
+function startGame(){
+    hideGameOver();
     document.querySelectorAll(".cuadro").forEach(cuadro => {
-        resaltarColor(cuadro.id);
+        highLightColor(cuadro.id);
     });
     roundHandler("computer");
 }
 
-function reiniciar(){
-    actualizarRonda(-ronda);
-    secuenciaComputadora = [];
-    secuenciaJugador = [];
+function restart(){
+    updateRound(-round);
+    computerSequence = [];
+    playerSequence = [];
 }
 /////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
 
 function roundHandler(nextTurn){
     if(nextTurn === "computer"){
-        actualizarRonda(1);
-        bloquearInput();
-        crearSecuencia();
+        updateRound(1);
+        blockInput();
+        startSequence();
     }else if(nextTurn === "player"){
-        secuenciaJugador = [];
-        desbloquearInput();
+        playerSequence = [];
+        unlockInput();
     }else if(nextTurn === "end"){
-        terminarJuego()
+        endGame()
     }
 }
-function terminarJuego(){
-    mostrarGameOver();
-    bloquearInput();
-    setTimeout(reiniciar, tic);
-    setTimeout(mostrarBotonInicio, tic);
+function endGame(){
+    showGameOver();
+    blockInput();
+    setTimeout(restart, tic);
+    setTimeout(showStartButton, tic);
 }
 /////////////////////////////////////////////////////TURNO COMPU////////////////////////////////////////
-function crearSecuencia(){
+function startSequence(){
     
-    secuenciaComputadora.push(randomCuadro());
-    secuenciaComputadora.forEach((cuadro, index) => {
+    computerSequence.push(randomColorBox());
+    computerSequence.forEach((cuadro, index) => {
         const tiempo = (index + 1) * tic;
-        setTimeout(resaltarColor, tiempo, cuadro);
+        setTimeout(highLightColor, tiempo, cuadro);
     });
-    const delay = (tic * secuenciaComputadora.length + 0.5*tic).toFixed(1);
+    const delay = (tic * computerSequence.length + 0.5*tic).toFixed(1);
     setTimeout(roundHandler, delay,"player");
-    reducirContadorCada100Ms((delay/1000)+0.1)
+    reduceCounterBy100Ms((delay/1000)+0.1)
 }
 
-function bloquearInput(){
+function blockInput(){
     document.querySelectorAll(".cuadro").forEach($cuadro => {
             $cuadro.onclick = function(){
                 console.log("input bloqueado")
@@ -62,38 +62,38 @@ function bloquearInput(){
     })
 }
 
-function randomCuadro(){
+function randomColorBox(){
     return `cuadro${Math.floor(Math.random() * 4) + 1}`;
 }
 
-function reducirContadorCada100Ms(ultimoValor){
+function reduceCounterBy100Ms(ultimoValor){
     if(ultimoValor <= 0){
         return;
     }
     const valorActual = (ultimoValor - 0.1).toFixed(1);
     document.querySelector("#contador").textContent = valorActual;
-    setTimeout(reducirContadorCada100Ms, 100, valorActual);
+    setTimeout(reduceCounterBy100Ms, 100, valorActual);
 }
 
 
 /////////////////////////////////////////////////////TURNO JUGADOR////////////////////////////////////////
 
-function manejarInput(event){
-    resaltarColor(event.target.id);
-    secuenciaJugador.push(event.target.id);
-    if(secuenciaJugador[secuenciaJugador.length-1] !== secuenciaComputadora[secuenciaJugador.length-1]){
+function handleInput(event){
+    highLightColor(event.target.id);
+    playerSequence.push(event.target.id);
+    if(playerSequence[playerSequence.length-1] !== computerSequence[playerSequence.length-1]){
         resaltarError(event.target.id);
         roundHandler("end")
         return;
     }
-    if(secuenciaComputadora.length === secuenciaJugador.length){
+    if(computerSequence.length === playerSequence.length){
         setTimeout(roundHandler, tic, "computer");
     }
 }
 
-function desbloquearInput(){
+function unlockInput(){
     document.querySelectorAll(".cuadro").forEach($cuadro => {
-            $cuadro.onclick = manejarInput
+            $cuadro.onclick = handleInput
     })
 }
 
@@ -110,28 +110,28 @@ function resaltarError(id){
 }
 
 /////////////////////////////////////////////////////OTROS////////////////////////////////////////
-function mostrarGameOver(){
+function showGameOver(){
     document.querySelector("#game-over").classList.remove("oculto");
 }
-function ocultarGameOver(){
+function hideGameOver(){
     document.querySelector("#game-over").classList.add("oculto");
 }
-function mostrarBotonInicio(){
+function showStartButton(){
     document.querySelector("#start").removeAttribute("disabled");
 
     //document.querySelector("#start").classList.remove("oculto");
 }
-function ocultarBotonInicio(){
+function hideStartButton(){
     document.querySelector("#start").setAttribute("disabled", "disabled");
 
     //document.querySelector("#start").classList.add("oculto");
 }
-function actualizarRonda(x){
-    ronda += x;
-    document.getElementById("ronda").textContent = ronda;
+function updateRound(x){
+    round += x;
+    document.getElementById("ronda").textContent = round;
 }
 
-function resaltarColor(id){
+function highLightColor(id){
     const $cuadro = document.getElementById(id);
     $cuadro.style.opacity = 1;
     setTimeout(() => {
