@@ -12,8 +12,8 @@ function comenzarJuego(){
     document.querySelectorAll(".cuadro").forEach(cuadro => {
         resaltarColor(cuadro.id);
     });
-    const esperaMs = 3*tic;
-    delayFunction(roundHandler, esperaMs, "computadora");
+    const delay = 3*tic;
+    setTimeout(roundHandler("computadora"), delay);
 }
 
 function reiniciar(){
@@ -50,6 +50,7 @@ function turnoCompu(){
     
     secuenciaComputadora.forEach((cuadro, index) => {
         const tiempo = (index + 1) * tic;
+        console.log(tiempo);
         setTimeout(resaltarColor(cuadro), tiempo);
     });
     const delay = tic * secuenciaComputadora.length + 1000;
@@ -117,10 +118,6 @@ function ocultarBotonInicio(){
 function actualizarRonda(x){
     ronda += x;
     document.getElementById("ronda").textContent = ronda;
-}
-
-function delayFunction(delayedFunction, ms, parametro){
-    setTimeout(delayedFunction(parametro), ms);
 }
 
 function resaltarColor(id){
