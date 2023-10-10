@@ -1,4 +1,5 @@
 document.querySelector("#start").addEventListener("click", function(){
+    tic = document.querySelector("#speed").value;
     disableStartButton();
     disableSpeedSettings();
     startGame("jugador")
@@ -48,7 +49,7 @@ function startSequence(){
     
     computerSequence.push(randomColorBox());
     computerSequence.forEach((colorBox, index) => {
-        const time = (index + 1) * tic;
+        const time = (index+0.5) * tic;
         setTimeout(highLightColor, time, colorBox);
     });
     const delay = (tic * computerSequence.length + 0.5*tic).toFixed(1);
@@ -119,10 +120,10 @@ function hideGameOver(){
     document.querySelector("#game-over").classList.add("oculto");
 }
 function enableSpeedSettings(){
-    document.querySelector("#velocidad").removeAttribute("disabled");
+    document.querySelector("#speed").removeAttribute("disabled");
 }
 function disableSpeedSettings(){
-    document.querySelector("#velocidad").setAttribute("disabled", "disabled");
+    document.querySelector("#speed").setAttribute("disabled", "disabled");
 }
 function enableStartButton(){
     document.querySelector("#start").removeAttribute("disabled");
