@@ -1,5 +1,6 @@
 document.querySelector("#start").addEventListener("click", function(){
-    hideStartButton();
+    disableStartButton();
+    disableSpeedSettings();
     startGame("jugador")
 });
 
@@ -39,7 +40,8 @@ function endGame(){
     showGameOver();
     blockInput();
     setTimeout(restart, tic);
-    setTimeout(showStartButton, tic);
+    setTimeout(enableStartButton, tic);
+    setTimeout(enableSpeedSettings, tic);
 }
 /////////////////////////////////////////////////////TURNO COMPU////////////////////////////////////////
 function startSequence(){
@@ -116,10 +118,16 @@ function showGameOver(){
 function hideGameOver(){
     document.querySelector("#game-over").classList.add("oculto");
 }
-function showStartButton(){
+function enableSpeedSettings(){
+    document.querySelector("#velocidad").removeAttribute("disabled");
+}
+function disableSpeedSettings(){
+    document.querySelector("#velocidad").setAttribute("disabled", "disabled");
+}
+function enableStartButton(){
     document.querySelector("#start").removeAttribute("disabled");
 }
-function hideStartButton(){
+function disableStartButton(){
     document.querySelector("#start").setAttribute("disabled", "disabled");
 }
 function updateRound(x){

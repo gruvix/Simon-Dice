@@ -10,7 +10,15 @@
  <body>
     <h1>Simon Dice</h1>
    <div class="row">Es el turno de<a id="turno">asdasd</a>Ronda N#<a id="ronda"></a></div>
-   <div><button type="button" id="start">Iniciar</button></div>
+   <div>
+      <button type="button" id="start">Iniciar</button>
+      <label for="velocidad">Velocidad del juego</label>
+      <select name="velocidad" id="velocidad">
+         <option value="Lento">Lento</option>
+         <option value="Medio">Medio</option>
+         <option value="Rapido">Rápido</option>
+      </select>
+   </div>
 
    <div class="container" id="tablero">
       <div class="row">
