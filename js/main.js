@@ -27,10 +27,12 @@ function restart(){
 
 function roundHandler(nextTurn){
     if(nextTurn === "computer"){
+        updateTurnName("la computadora");
         updateRound(1);
         blockInput();
         setTimeout(startSequence, tic);
     }else if(nextTurn === "player"){
+        updateTurnName("el jugador");
         playerSequence = [];
         unlockInput();
     }else if(nextTurn === "end"){
@@ -127,6 +129,9 @@ function highLightCorrect(id){
 }
 
 /////////////////////////////////////////////////////OTROS////////////////////////////////////////
+function updateTurnName(turnName){
+    document.querySelector("#turno").textContent = turnName;
+}
 function showGameOver(){
     document.querySelector("#game-over").classList.remove("oculto");
 }
