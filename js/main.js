@@ -56,7 +56,7 @@ function startSequence(){
     });
     const delay = (tic * computerSequence.length + 1*tic).toFixed(1);
     setTimeout(roundHandler, delay,"player");
-    reduceCounterBy100Ms((delay/1000))
+    reduceCounterBy100Ms((delay))
 }
 
 function blockInput(){
@@ -75,8 +75,8 @@ function reduceCounterBy100Ms(ultimoValor){
     if(ultimoValor <= 0){
         return;
     }
-    const valorActual = (ultimoValor - 0.1).toFixed(1);
-    document.querySelector("#contador").textContent = valorActual;
+    const valorActual = ultimoValor - 100;
+    document.querySelector("#contador").textContent = (valorActual/1000).toFixed(1);
     setTimeout(reduceCounterBy100Ms, 100, valorActual);
 }
 /////////////////////////////////////////////////////TURNO JUGADOR////////////////////////////////////////
