@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/gruvix/Simon-Dice/issues"
   },
-  "homepage": "https://github.com/gruvix/Simon-Dice#readme"
+  "homepage": "https://github.com/gruvix/Simon-Dice#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.2"
+  }
 }
