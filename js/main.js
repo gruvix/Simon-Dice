@@ -65,6 +65,7 @@ function startSequence(){
     computerSequence.forEach((colorBox, index) => {
         const time = (index+0.5) * tic;
         setTimeout(highLightColor, time, colorBox);
+        setTimeout(handleSound, time+(0.5*tic), colorBox);
     });
     const delay = (tic * computerSequence.length + 1*tic).toFixed(1);
     setTimeout(roundHandler, delay,"player");
