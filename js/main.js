@@ -155,13 +155,8 @@ function hideCheat(){
     document.querySelector("#cheat-code").classList.add("oculto");
 }
 function updateCheat(){
-    // const $CheatCode = document.querySelectorAll("#cheat-box");
-    // $CheatCode.forEach(element => {
-    //     element.remove();
-    // });
     const $CheatCode = document.querySelector("#cheat-code");
     $CheatCode.innerHTML = "";
-
     computerSequence.forEach(element => {
         const $cuadro = document.createElement("div");
         $cuadro.setAttribute("id", "cheat-box");
