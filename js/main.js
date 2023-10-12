@@ -37,9 +37,12 @@ function roundHandler(nextTurn){
         blockInput();
         setTimeout(startSequence, tic);
     }else if(nextTurn === "player"){
-        updateTurnName("el jugador");
         playerSequence = [];
         unlockInput();
+        updateTurnName("el jugador");
+        if(cheatEnabled){
+            updateCheat();
+        }
     }else if(nextTurn === "end"){
         endGame()
     }
@@ -152,35 +155,45 @@ function hideCheat(){
     document.querySelector("#cheat-code").classList.add("oculto");
 }
 function updateCheat(){
-    const $CheatCode = document.querySelectorAll("#cheat-box");
-    $CheatCode.forEach(element => {
-        element.remove();
-    });
+    // const $CheatCode = document.querySelectorAll("#cheat-box");
+    // $CheatCode.forEach(element => {
+    //     element.remove();
+    // });
+    const $CheatCode = document.querySelector("#cheat-code");
+    $CheatCode.innerHTML = "";
+
     computerSequence.forEach(element => {
         const $cuadro = document.createElement("div");
-        $cuadro.setAttribute("class", "cheat-box");
-        document.querySelector("#cheat-code").appendChild($cuadro);
+        $cuadro.setAttribute("id", "cheat-box");
+        $CheatCode.appendChild($cuadro);
+        const $space = document.createElement("div");
+        $space.innerHTML = '&nbsp;';
+        $CheatCode.appendChild($space);
         let color = "black";
+        let text = "cuadro";
         switch (element) {
             case "cuadro1":
+                text = 'cuadro 1';
                 color = 'rgb(243, 89, 192)';
                 break;
             case "cuadro2":
                 color = 'rgb(19, 89, 219)';
+                text = 'cuadro 2';
                 break;
             case "cuadro3":
+                text = 'cuadro 3';
                 color = 'rgb(86, 236, 86)';
                 break;
             case "cuadro4":
+                text = 'cuadro 4';
                 color = 'rgb(252, 172, 23)';
                 break;
             default:
                 color = "black";
                 break;
         }
-        $cuadro.textContent = element;
+        $cuadro.textContent = text;
         $cuadro.style.color = color;
-
     });
 }
 function updateTurnName(turnName){
