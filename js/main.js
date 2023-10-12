@@ -5,10 +5,15 @@ document.querySelector("#start").addEventListener("click", function(){
     startGame("jugador")
 });
 
+document.querySelector("#cheat-button").addEventListener("click", function(){
+    cheat();
+});
+
 let tic = 1000; //controla la velocidad del juego, siendo el tiempo en milisegundos
 let round = 0;
 let computerSequence = [];
 let playerSequence = [];
+let cheatEnabled = false;
 
 function startGame(){
     hideGameOver();
@@ -128,7 +133,56 @@ function highLightCorrect(id){
     }
 }
 
+function cheat(){
+    cheatEnabled = !cheatEnabled;
+    if(cheatEnabled){
+        updateCheat();
+        showCheat();
+    }
+    else{
+        hideCheat();
+    }
+}
+
 /////////////////////////////////////////////////////OTROS////////////////////////////////////////
+function showCheat(){
+    document.querySelector("#cheat-code").classList.remove("oculto");
+}
+function hideCheat(){
+    document.querySelector("#cheat-code").classList.add("oculto");
+}
+function updateCheat(){
+    const $CheatCode = document.querySelectorAll("#cheat-box");
+    $CheatCode.forEach(element => {
+        element.remove();
+    });
+    computerSequence.forEach(element => {
+        const $cuadro = document.createElement("div");
+        $cuadro.setAttribute("class", "cheat-box");
+        document.querySelector("#cheat-code").appendChild($cuadro);
+        let color = "black";
+        switch (element) {
+            case "cuadro1":
+                color = 'rgb(243, 89, 192)';
+                break;
+            case "cuadro2":
+                color = 'rgb(19, 89, 219)';
+                break;
+            case "cuadro3":
+                color = 'rgb(86, 236, 86)';
+                break;
+            case "cuadro4":
+                color = 'rgb(252, 172, 23)';
+                break;
+            default:
+                color = "black";
+                break;
+        }
+        $cuadro.textContent = element;
+        $cuadro.style.color = color;
+
+    });
+}
 function updateTurnName(turnName){
     const $turn = document.querySelector("#turn");
     $turn.textContent = turnName;
