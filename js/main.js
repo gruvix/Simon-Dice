@@ -6,7 +6,7 @@ document.querySelector("#start").addEventListener("click", function(){
 });
 
 document.querySelector("#cheat-button").addEventListener("click", function(){
-    cheat();
+    cheatHandler();
 });
 
 let tic = 1000; //controls general game speed, in miliseconds
@@ -104,6 +104,9 @@ function compareSequences(id){
         return "end";
     }
     if(computerSequence.length === playerSequence.length){
+        if(cheatEnabled){
+            updateCheatCurrentBox();
+        }
         return "computer";
     }
 }
@@ -177,7 +180,7 @@ function highLightColor(id){
     }, tic*0.5);
 }
 ///////////////////////////////////////////////////////CHEAT////////////////////////////////////////
-function cheat(){
+function cheatHandler(){
     cheatEnabled = !cheatEnabled;
     if(cheatEnabled){
         updateCheat();
@@ -195,6 +198,7 @@ function updateCheatCurrentBox(){
     $sequence.forEach(element => {
         element.classList.remove("next");
     });
+    if($sequence[nextBox] === undefined){return;}
     $sequence[nextBox].classList.add("next")
 }
 function showCheat(){
