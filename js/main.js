@@ -158,9 +158,9 @@ function updateCheat(){
     const $CheatCode = document.querySelector("#cheat-code");
     $CheatCode.innerHTML = "";
     computerSequence.forEach(element => {
-        const $cuadro = document.createElement("div");
-        $cuadro.setAttribute("id", "cheat-box");
-        $CheatCode.appendChild($cuadro);
+        const $colorBox = document.createElement("div");
+        $colorBox.setAttribute("id", "cheat-box");
+        $CheatCode.appendChild($colorBox);
         const $space = document.createElement("div");
         $space.innerHTML = '&nbsp;';
         $CheatCode.appendChild($space);
@@ -187,8 +187,8 @@ function updateCheat(){
                 color = "black";
                 break;
         }
-        $cuadro.textContent = text;
-        $cuadro.style.color = color;
+        $colorBox.textContent = text;
+        $colorBox.style.color = color;
     });
 }
 function updateTurnName(turnName){
