@@ -51,3 +51,8 @@
     color: red;
     font-weight: bold;
 }
+
+.next{
+    font-weight: bold;
+    border: 2px solid blueviolet;
+}

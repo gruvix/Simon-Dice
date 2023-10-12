@@ -9,7 +9,7 @@ document.querySelector("#cheat-button").addEventListener("click", function(){
     cheat();
 });
 
-let tic = 1000; //controla la velocidad del juego, siendo el tiempo en milisegundos
+let tic = 1000; //controls general game speed, in miliseconds
 let round = 0;
 let computerSequence = [];
 let playerSequence = [];
@@ -42,9 +42,12 @@ function roundHandler(nextTurn){
         updateTurnName("el jugador");
         if(cheatEnabled){
             updateCheat();
+            updateCheatCurrentBox();
         }
     }else if(nextTurn === "end"){
         endGame()
+    }else if(cheatEnabled){
+        updateCheatCurrentBox();
     }
 }
 function endGame(){
@@ -131,19 +134,69 @@ function highLightCorrect(id){
         }, index*200+100);
     }
 }
-
+/////////////////////////////////////////////////////OTHER////////////////////////////////////////
+function updateTurnName(turnName){
+    const $turn = document.querySelector("#turn");
+    $turn.textContent = turnName;
+    if(turnName === "el jugador"){
+        $turn.classList.add("player");
+        $turn.classList.remove("computer");
+    }else{
+        $turn.classList.add("computer");
+        $turn.classList.remove("player");
+    }
+}
+function showGameOver(){
+    document.querySelector("#game-over").classList.remove("oculto");
+}
+function hideGameOver(){
+    document.querySelector("#game-over").classList.add("oculto");
+}
+function enableSpeedSettings(){
+    document.querySelector("#speed").removeAttribute("disabled");
+}
+function disableSpeedSettings(){
+    document.querySelector("#speed").setAttribute("disabled", "disabled");
+}
+function enableStartButton(){
+    document.querySelector("#start").removeAttribute("disabled");
+}
+function disableStartButton(){
+    document.querySelector("#start").setAttribute("disabled", "disabled");
+}
+function updateRound(x){
+    round += x;
+    document.getElementById("ronda").textContent = round;
+}
+//different to highlight correct and wrong box, this simply enlightens a color box
+function highLightColor(id){
+    const $cuadro = document.getElementById(id);
+    $cuadro.style.opacity = 1;
+    setTimeout(() => {
+        $cuadro.style.opacity = 0.6;
+    }, tic*0.5);
+}
+///////////////////////////////////////////////////////CHEAT////////////////////////////////////////
 function cheat(){
     cheatEnabled = !cheatEnabled;
     if(cheatEnabled){
         updateCheat();
+        updateCheatCurrentBox();
         showCheat();
     }
     else{
         hideCheat();
     }
 }
-
-/////////////////////////////////////////////////////OTHER////////////////////////////////////////
+function updateCheatCurrentBox(){
+    const nextBox = playerSequence.length;
+    const $sequence = document.querySelectorAll("#cheat-box");
+    if(computerSequence.length == 0){return;}
+    $sequence.forEach(element => {
+        element.classList.remove("next");
+    });
+    $sequence[nextBox].classList.add("next")
+}
 function showCheat(){
     document.querySelector("#cheat-code").classList.remove("oculto");
 }
@@ -193,45 +246,3 @@ function updateCheat(){
         $colorBox.style.color = color;
     });
 }
-function updateTurnName(turnName){
-    const $turn = document.querySelector("#turn");
-    $turn.textContent = turnName;
-    if(turnName === "el jugador"){
-        $turn.classList.add("player");
-        $turn.classList.remove("computer");
-    }else{
-        $turn.classList.add("computer");
-        $turn.classList.remove("player");
-    }
-}
-function showGameOver(){
-    document.querySelector("#game-over").classList.remove("oculto");
-}
-function hideGameOver(){
-    document.querySelector("#game-over").classList.add("oculto");
-}
-function enableSpeedSettings(){
-    document.querySelector("#speed").removeAttribute("disabled");
-}
-function disableSpeedSettings(){
-    document.querySelector("#speed").setAttribute("disabled", "disabled");
-}
-function enableStartButton(){
-    document.querySelector("#start").removeAttribute("disabled");
-}
-function disableStartButton(){
-    document.querySelector("#start").setAttribute("disabled", "disabled");
-}
-function updateRound(x){
-    round += x;
-    document.getElementById("ronda").textContent = round;
-}
-//different to highlight correct and wrong box, this simply enlightens a color box
-function highLightColor(id){
-    const $cuadro = document.getElementById(id);
-    $cuadro.style.opacity = 1;
-    setTimeout(() => {
-        $cuadro.style.opacity = 0.6;
-    }, tic*0.5);
-}
-
