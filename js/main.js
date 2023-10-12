@@ -54,7 +54,7 @@ function endGame(){
     setTimeout(enableStartButton, tic);
     setTimeout(enableSpeedSettings, tic);
 }
-/////////////////////////////////////////////////////TURNO COMPU////////////////////////////////////////
+/////////////////////////////////////////////////////COMPUTER TURN////////////////////////////////////////
 function startSequence(){
     
     computerSequence.push(randomColorBox());
@@ -87,7 +87,7 @@ function reduceCounterBy100Ms(ultimoValor){
     document.querySelector("#contador").textContent = (valorActual/1000).toFixed(1);
     setTimeout(reduceCounterBy100Ms, 100, valorActual);
 }
-/////////////////////////////////////////////////////TURNO JUGADOR////////////////////////////////////////
+/////////////////////////////////////////////////////PLAYER TURN////////////////////////////////////////
 function handleInput(event){
     const id = event.target.id;
     highLightColor(id);
@@ -104,14 +104,11 @@ function compareSequences(id){
         return "computer";
     }
 }
-
-
 function unlockInput(){
     document.querySelectorAll(".cuadro").forEach($cuadro => {
             $cuadro.onclick = handleInput
     })
 }
-
 function highLightError(id){
     for(let index = 0; index < 7; index++){
         const $cuadro = document.getElementById(id);
@@ -123,7 +120,6 @@ function highLightError(id){
         }, index*200+100);
     }
 }
-
 function highLightCorrect(id){
     for(let index = 0; index < 7; index++){
         const $cuadro = document.getElementById(id);
@@ -147,7 +143,7 @@ function cheat(){
     }
 }
 
-/////////////////////////////////////////////////////OTROS////////////////////////////////////////
+/////////////////////////////////////////////////////OTHER////////////////////////////////////////
 function showCheat(){
     document.querySelector("#cheat-code").classList.remove("oculto");
 }
@@ -155,25 +151,30 @@ function hideCheat(){
     document.querySelector("#cheat-code").classList.add("oculto");
 }
 function updateCheat(){
+    //first clean old cheatcode
     const $CheatCode = document.querySelector("#cheat-code");
     $CheatCode.innerHTML = "";
     computerSequence.forEach(element => {
+        //create div for each sequence step
         const $colorBox = document.createElement("div");
         $colorBox.setAttribute("id", "cheat-box");
         $CheatCode.appendChild($colorBox);
+        //add a space
         const $space = document.createElement("div");
         $space.innerHTML = '&nbsp;';
         $CheatCode.appendChild($space);
-        let color = "black";
-        let text = "cuadro";
+
+        let color;
+        let text;
+        //set color
         switch (element) {
             case "cuadro1":
                 text = 'cuadro 1';
                 color = 'rgb(243, 89, 192)';
                 break;
             case "cuadro2":
-                color = 'rgb(19, 89, 219)';
                 text = 'cuadro 2';
+                color = 'rgb(19, 89, 219)';
                 break;
             case "cuadro3":
                 text = 'cuadro 3';
@@ -184,6 +185,7 @@ function updateCheat(){
                 color = 'rgb(252, 172, 23)';
                 break;
             default:
+                text = "cuadro";
                 color = "black";
                 break;
         }
@@ -224,6 +226,7 @@ function updateRound(x){
     round += x;
     document.getElementById("ronda").textContent = round;
 }
+//different to highlight correct and wrong box, this simply enlightens a color box
 function highLightColor(id){
     const $cuadro = document.getElementById(id);
     $cuadro.style.opacity = 1;
