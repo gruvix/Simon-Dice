@@ -224,14 +224,11 @@ function updateCheat(){
     const $CheatCode = document.querySelector("#cheat-code");
     $CheatCode.innerHTML = "";
     computerSequence.forEach(element => {
-        //create div for each sequence step
+        //create div for each step
         const $colorBox = document.createElement("div");
         $colorBox.setAttribute("id", "cheat-box");
+        $colorBox.classList.add("col-sm-1");
         $CheatCode.appendChild($colorBox);
-        //add a space
-        const $space = document.createElement("div");
-        $space.innerHTML = '&nbsp;';
-        $CheatCode.appendChild($space);
 
         let color;
         let text;

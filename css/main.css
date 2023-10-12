@@ -1,11 +1,4 @@
-.row {
-    display: flex;
-}
-
 .cuadro {
-    flex-basis: calc(50% - 10px); /* El ancho inicial que desees */
-    max-width: calc(10% - 100px); /* El ancho máximo que desees */
-    min-width: 100px;
     height: 100px;
     opacity: 0.6;
     transition: opacity 500ms ease;
@@ -18,7 +11,7 @@
     background-color: rgb(19, 89, 219);
 }
 #cuadro3{
-    background-color: rgb(86, 236, 86);
+    background-color: rgb(52, 189, 52);
 }
 #cuadro4{
     background-color: rgb(252, 172, 23);
