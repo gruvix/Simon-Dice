@@ -227,7 +227,7 @@ function updateCheat(){
         //create div for each step
         const $colorBox = document.createElement("div");
         $colorBox.setAttribute("id", "cheat-box");
-        $colorBox.classList.add("col-sm-1");
+        $colorBox.classList.add("col");
         $CheatCode.appendChild($colorBox);
 
         let color;
