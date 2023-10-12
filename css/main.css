@@ -35,8 +35,15 @@
     border: 5px solid green;
 }
 
-#turno {
+#turn{
     font-weight: bold;
+}
+
+.player {
+    color: green;
+}
+
+.computer{
     color: blue;
 }
 

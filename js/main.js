@@ -130,7 +130,15 @@ function highLightCorrect(id){
 
 /////////////////////////////////////////////////////OTROS////////////////////////////////////////
 function updateTurnName(turnName){
-    document.querySelector("#turno").textContent = turnName;
+    const $turn = document.querySelector("#turn");
+    $turn.textContent = turnName;
+    if(turnName === "el jugador"){
+        $turn.classList.add("player");
+        $turn.classList.remove("computer");
+    }else{
+        $turn.classList.add("computer");
+        $turn.classList.remove("player");
+    }
 }
 function showGameOver(){
     document.querySelector("#game-over").classList.remove("oculto");
