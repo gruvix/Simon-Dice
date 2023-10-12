@@ -13,13 +13,13 @@
     <h1>Simon Dice</h1>
     <div class="container">
       <div class="row">
-         <div class="col-sm-4">
+         <div class="col-sm-4 alert alert-secondary" role="alert">
             Es el turno de&nbsp;<a id="turn"> - </a>
          </div>
-         <div class="col-sm-4">
+         <div class="col-sm-4 alert alert-secondary" role="alert">
             &nbsp;Ronda N#<a id="ronda">-</a>
          </div>
-         <div class="col-sm-4">
+         <div class="col-sm-4 alert alert-secondary" role="alert">
             <label for="speed">Velocidad del juego</label>
             <select name="speed" id="speed">
                <option value="2000">Lento</option>
@@ -81,7 +81,9 @@
    </div>
 
    <div class="container">
-      <a id="game-over" class="oculto alert alert-danger" role="alert">¡Perdiste! toca iniciar para empezar de nuevo</a>
+      <div class="row">
+         <a id="game-over" class="oculto alert alert-danger" role="alert">¡Perdiste! toca iniciar para empezar de nuevo</a>
+      </div>
    </div>
    <script src='js/main.js'></script>
  </body>
