@@ -1,0 +1,19 @@
+{
+  "name": "simon-dice",
+  "version": "1.0.0",
+  "description": "Juego de Simon Dice para r/ArgentinaPrograma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gruvix/Simon-Dice.git"
+  },
+  "author": "Timothy Burton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gruvix/Simon-Dice/issues"
+  },
+  "homepage": "https://github.com/gruvix/Simon-Dice#readme"
+}
