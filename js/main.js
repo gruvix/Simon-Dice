@@ -14,6 +14,7 @@ let round = 0;
 let computerSequence = [];
 let playerSequence = [];
 let cheatEnabled = false;
+const soundError = new Audio("sounds/error.mp3");
 
 function startGame(){
     hideGameOver();
@@ -96,11 +97,13 @@ function handleInput(event){
     highLightColor(id);
     playerSequence.push(id);
     roundHandler(compareSequences(id));
+    handleSound(id);
 }
 function compareSequences(id){
     if(playerSequence[playerSequence.length-1] !== computerSequence[playerSequence.length-1]){
         highLightError(id);
         highLightCorrect(computerSequence[playerSequence.length-1]);
+        handleSound();
         return "end";
     }
     if(computerSequence.length === playerSequence.length){
@@ -137,7 +140,15 @@ function highLightCorrect(id){
         }, index*200+100);
     }
 }
+
 /////////////////////////////////////////////////////OTHER////////////////////////////////////////
+function handleSound(id){
+    if(!id) {
+        soundError.play();
+        return;
+    }
+    document.getElementById(id).firstChild.play();
+}
 function updateTurnName(turnName){
     const $turn = document.querySelector("#turn");
     $turn.textContent = turnName;
