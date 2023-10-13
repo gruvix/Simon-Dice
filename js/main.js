@@ -1,5 +1,4 @@
 document.querySelector("#start").addEventListener("click", function(){
-    gameSpeedInMs = document.querySelector("#speed").value;
     disableStartButton();
     disableSpeedSettings();
     startGame("jugador")
@@ -9,7 +8,6 @@ document.querySelector("#cheat-button").addEventListener("click", function(){
     cheatHandler();
 });
 
-let gameSpeedInMs = 1000; //controls general game speed, in miliseconds
 let round = 0;
 let computerSequence = [];
 let playerSequence = [];
@@ -30,6 +28,7 @@ function restart(){
     playerSequence = [];
 }
 function roundHandler(nextTurn){
+    const gameSpeedInMs = document.querySelector("#speed").value;
     if(nextTurn === "computer"){
         updateTurnName("la computadora");
         updateRound(1);
@@ -50,6 +49,7 @@ function roundHandler(nextTurn){
     }
 }
 function endGame(){
+    const gameSpeedInMs = document.querySelector("#speed").value;
     showGameOver();
     blockInput();
     setTimeout(restart, gameSpeedInMs);
@@ -97,6 +97,7 @@ function updateRound(x){
     document.getElementById("round").innerText = round;
 }
 function highLightColor(id){
+    const gameSpeedInMs = document.querySelector("#speed").value;
     const $rectangle = document.getElementById(id);
     $rectangle.style.opacity = 1;
     setTimeout(() => {
