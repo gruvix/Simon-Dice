@@ -1,5 +1,5 @@
 function startSequence(){
-    
+    const gameSpeedInMs = document.querySelector("#speed").value;
     computerSequence.push(randomColorBox());
     computerSequence.forEach((colorBox, index) => {
         const time = (index+0.5) * gameSpeedInMs;
