@@ -2,11 +2,11 @@ function startSequence(){
     const gameSpeedInMs = document.querySelector("#speed").value;
     computerSequence.push(randomColorBox());
     computerSequence.forEach((colorBox, index) => {
-        const time = (index+0.5) * gameSpeedInMs;
+        const time = (index) * gameSpeedInMs;
         setTimeout(highLightColor, time, colorBox);
-        setTimeout(handleSound, time+(0.5*gameSpeedInMs), colorBox);
+        setTimeout(handleSound, time, colorBox);
     });
-    const delay = (gameSpeedInMs * computerSequence.length + gameSpeedInMs).toFixed(1);
+    const delay = (gameSpeedInMs * computerSequence.length).toFixed(1);
     setTimeout(roundHandler, delay,"player");
     reduceCounterBy100Ms((delay))
 }
