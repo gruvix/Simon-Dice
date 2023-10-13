@@ -6,7 +6,7 @@ function startSequence(){
         setTimeout(highLightColor, time, colorBox);
         setTimeout(handleSound, time+(0.5*gameSpeedInMs), colorBox);
     });
-    const delay = (gameSpeedInMs * computerSequence.length + 1*gameSpeedInMs).toFixed(1);
+    const delay = (gameSpeedInMs * computerSequence.length + gameSpeedInMs).toFixed(1);
     setTimeout(roundHandler, delay,"player");
     reduceCounterBy100Ms((delay))
 }
