@@ -81,7 +81,9 @@ function blockInput(){
 }
 
 function randomColorBox(){
-    return `rectangle${Math.floor(Math.random() * 4) + 1}`;
+    const colorsAmount = document.querySelectorAll(".rectangle").length;
+    const colorNumber = Math.floor(Math.random() * colorsAmount) + 1;
+    return `rectangle${colorNumber}`;
 }
 
 function reduceCounterBy100Ms(ultimoValor){
