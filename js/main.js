@@ -29,8 +29,6 @@ function restart(){
     computerSequence = [];
     playerSequence = [];
 }
-/////////////////////////////////////////////////////ROUND HANDLER////////////////////////////////////////
-
 function roundHandler(nextTurn){
     if(nextTurn === "computer"){
         updateTurnName("la computadora");
@@ -58,9 +56,6 @@ function endGame(){
     setTimeout(enableStartButton, tic);
     setTimeout(enableSpeedSettings, tic);
 }
-/////////////////////////////////////////////////////COMPUTER TURN////////////////////////////////////////
-/////////////////////////////////////////////////////PLAYER TURN////////////////////////////////////////
-/////////////////////////////////////////////////////OTHER////////////////////////////////////////
 function handleSound(id){
     if(!id) {
         soundError.play();
@@ -101,7 +96,6 @@ function updateRound(x){
     round += x;
     document.getElementById("round").innerText = round;
 }
-//different to highlight correct and wrong box, this simply enlightens a color box
 function highLightColor(id){
     const $rectangle = document.getElementById(id);
     $rectangle.style.opacity = 1;
@@ -109,4 +103,3 @@ function highLightColor(id){
         $rectangle.style.opacity = 0.6;
     }, tic*0.5);
 }
-///////////////////////////////////////////////////////CHEAT////////////////////////////////////////
