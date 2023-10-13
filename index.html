@@ -14,7 +14,7 @@
     <div class="container">
       <div class="row">
          <div class="col-sm-4 alert alert-secondary" role="alert">
-            Es el turno de&nbsp;<a id="turn"> - </a>
+            Es el turno de&nbsp;<un id="turn"> - </un>
          </div>
          <div class="col-sm-4 alert alert-secondary" role="alert">
             &nbsp;Ronda N#<a id="ronda">-</a>
@@ -23,7 +23,7 @@
             <label for="speed">Velocidad del juego</label>
             <select name="speed" id="speed">
                <option value="2000">Lento</option>
-               <option value="1000">Medio</option>
+               <option value="1000" selected>Medio</option>
                <option value="500">Rápido</option>
             </select>
          </div>
@@ -61,7 +61,7 @@
    </div>
    <div class="container">
       <div class="col-sm">
-         <div>Próximo turno en&nbsp;<a id="contador">0</a>&nbsp;segundos</div>
+         <div>Próximo turno en&nbsp;<un id="contador">0</un>&nbsp;segundos</div>
       </div>
    </div>
 
@@ -78,7 +78,7 @@
 
    <div class="container">
       <div class="row">
-         <a id="game-over" class="oculto alert alert-danger" role="alert">¡Perdiste! toca iniciar para empezar de nuevo</a>
+         <un id="game-over" class="oculto alert alert-danger" role="alert">¡Perdiste! toca iniciar para empezar de nuevo</un>
       </div>
    </div>
    <script src='js/main.js'></script>
