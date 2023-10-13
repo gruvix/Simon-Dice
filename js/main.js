@@ -181,7 +181,7 @@ function disableStartButton(){
 }
 function updateRound(x){
     round += x;
-    document.getElementById("ronda").textContent = round;
+    document.getElementById("round").innerText = round;
 }
 //different to highlight correct and wrong box, this simply enlightens a color box
 function highLightColor(id){
