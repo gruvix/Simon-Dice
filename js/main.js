@@ -18,8 +18,8 @@ const soundError = new Audio("sounds/error.mp3");
 
 function startGame(){
     hideGameOver();
-    document.querySelectorAll(".cuadro").forEach(cuadro => {
-        highLightColor(cuadro.id);
+    document.querySelectorAll(".rectangle").forEach($rectangle => {
+        highLightColor($rectangle.id);
     });
     roundHandler("computer");
 }
@@ -73,15 +73,15 @@ function startSequence(){
 }
 
 function blockInput(){
-    document.querySelectorAll(".cuadro").forEach($cuadro => {
-            $cuadro.onclick = function(){
+    document.querySelectorAll(".rectangle").forEach($rectangle => {
+            $rectangle.onclick = function(){
                 console.log("input bloqueado")
             }
     })
 }
 
 function randomColorBox(){
-    return `cuadro${Math.floor(Math.random() * 4) + 1}`;
+    return `rectangle${Math.floor(Math.random() * 4) + 1}`;
 }
 
 function reduceCounterBy100Ms(ultimoValor){
@@ -115,29 +115,29 @@ function compareSequences(id){
     }
 }
 function unlockInput(){
-    document.querySelectorAll(".cuadro").forEach($cuadro => {
-            $cuadro.onclick = handleInput
+    document.querySelectorAll(".rectangle").forEach($rectangle => {
+            $rectangle.onclick = handleInput
     })
 }
 function highLightError(id){
     for(let index = 0; index < 7; index++){
-        const $cuadro = document.getElementById(id);
+        const $rectangle = document.getElementById(id);
         setTimeout(function() {
-            $cuadro.classList.add("error");
+            $rectangle.classList.add("error");
         }, index*200);
         setTimeout(function() {
-            $cuadro.classList.remove("error");
+            $rectangle.classList.remove("error");
         }, index*200+100);
     }
 }
 function highLightCorrect(id){
     for(let index = 0; index < 7; index++){
-        const $cuadro = document.getElementById(id);
+        const $rectangle = document.getElementById(id);
         setTimeout(function() {
-            $cuadro.classList.add("correct");
+            $rectangle.classList.add("correct");
         }, index*200);
         setTimeout(function() {
-            $cuadro.classList.remove("correct");
+            $rectangle.classList.remove("correct");
         }, index*200+100);
     }
 }
@@ -185,10 +185,10 @@ function updateRound(x){
 }
 //different to highlight correct and wrong box, this simply enlightens a color box
 function highLightColor(id){
-    const $cuadro = document.getElementById(id);
-    $cuadro.style.opacity = 1;
+    const $rectangle = document.getElementById(id);
+    $rectangle.style.opacity = 1;
     setTimeout(() => {
-        $cuadro.style.opacity = 0.6;
+        $rectangle.style.opacity = 0.6;
     }, tic*0.5);
 }
 ///////////////////////////////////////////////////////CHEAT////////////////////////////////////////
@@ -234,20 +234,20 @@ function updateCheat(){
         let text;
         //set color
         switch (element) {
-            case "cuadro1":
-                text = 'cuadro 1';
+            case "rectangle1":
+                text = 'Cuadro 1';
                 color = 'rgb(243, 89, 192)';
                 break;
-            case "cuadro2":
-                text = 'cuadro 2';
+            case "rectangle2":
+                text = 'Cuadro 2';
                 color = 'rgb(19, 89, 219)';
                 break;
-            case "cuadro3":
-                text = 'cuadro 3';
+            case "rectangle3":
+                text = 'Cuadro 3';
                 color = 'rgb(86, 236, 86)';
                 break;
-            case "cuadro4":
-                text = 'cuadro 4';
+            case "rectangle4":
+                text = 'Cuadro 4';
                 color = 'rgb(252, 172, 23)';
                 break;
             default:
