@@ -8,7 +8,7 @@ function startSequence(){
     });
     const delay = (gameSpeedInMs * computerSequence.length).toFixed(1);
     setTimeout(roundHandler, delay,"player");
-    reduceCounterBy100Ms((delay))
+    reduceCounter((delay))
 }
 
 function blockInput(){
@@ -25,11 +25,12 @@ function randomColorBox(){
     return `rectangle${colorNumber}`;
 }
 
-function reduceCounterBy100Ms(ultimoValor){
-    if(ultimoValor <= 0){
+function reduceCounter(lastValue){
+    const reduction = 100;
+    if(lastValue <= 0){
         return;
     }
-    const valorActual = ultimoValor - 100;
-    document.querySelector("#contador").textContent = (valorActual/1000).toFixed(1);
-    setTimeout(reduceCounterBy100Ms, 100, valorActual);
+    const currentValue = lastValue - reduction;
+    document.querySelector("#counter").textContent = (currentValue/1000).toFixed(1);
+    setTimeout(reduceCounter, 100, currentValue);
 }
