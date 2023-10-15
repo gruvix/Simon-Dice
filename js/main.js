@@ -28,16 +28,18 @@ function restart(){
     playerSequence = [];
 }
 function roundHandler(nextTurn){
+    const computerTurnName = 'la computadora';
+    const playerTurnName = 'el jugador';
     const gameSpeedInMs = Number(document.querySelector("#speed").value);
     if(nextTurn === "computer"){
-        updateTurnName("la computadora");
+        updateTurnName(computerTurnName);
         updateRound(1);
         blockInput();
         setTimeout(startSequence, gameSpeedInMs);
     }else if(nextTurn === "player"){
         playerSequence = [];
         unlockInput();
-        updateTurnName("el jugador");
+        updateTurnName(playerTurnName);
         if(cheatEnabled){
             updateCheat();
             updateCheatCurrentBox();
@@ -65,13 +67,15 @@ function handleSound(id){
 }
 function updateTurnName(turnName){
     const $turn = document.querySelector("#turn");
+    const playerClass = "player";
+    const computerClass = "computer";
     $turn.textContent = turnName;
-    if(turnName === "el jugador"){
-        $turn.classList.add("player");
-        $turn.classList.remove("computer");
+    if($turn.classList.contains(computerClass)){
+        $turn.classList.add(playerClass);
+        $turn.classList.remove(computerClass);
     }else{
-        $turn.classList.add("computer");
-        $turn.classList.remove("player");
+        $turn.classList.add(computerClass);
+        $turn.classList.remove(playerClass);
     }
 }
 function showGameOver(){
